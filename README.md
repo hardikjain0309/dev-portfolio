@@ -6,7 +6,7 @@ I want to use this portfolio for anyone to know my journey of personal projects;
 
 ## Tech stack
 
-Language: Typescript
-Package Manager: pnpm
-UI Framework: React, Next.js
-CSS Framework: Tailwind CSS
+Language: Typescript <br>
+Package Manager: pnpm <br>
+UI Framework: React, Next.js <br>
+CSS Framework: Tailwind CSS <br>
