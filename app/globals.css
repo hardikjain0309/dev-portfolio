@@ -1,3 +1,118 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.logo-animation-container {
+  --bracket-width: 20px;
+  --final-height: 200px;
+  --mid-width: 120px;
+  --final-width: 200px;
+  --bracket-ends-length: 40px;
+  --hyphen-length: 80px;
+  --square-popup-duration: 200ms;
+  --line-popup-duration: 200ms;
+  --hyphen-span-duration: 500ms;
+  --h-lines-popup-duration: 500ms;
+
+  .bracket-vline-left {
+    width: var(--bracket-width);
+    height: var(--bracket-width);
+    animation: logo-square-popup var(--square-popup-duration) forwards,
+      logo-vline-left-popup var(--line-popup-duration) forwards var(--square-popup-duration)
+  }
+
+  .bracket-vline-right {
+    width: 0;
+    height: var(--final-height);
+    animation: logo-vline-right-popup var(--line-popup-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration));
+  }
+
+  .final-width {
+    animation: logo-vlines-apart var(--hyphen-span-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration)),
+      logo-full-width var(--h-lines-popup-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration));
+  }
+
+  .bracket-h-line {
+    height: var(--bracket-width);
+    width: 0;
+    animation: logo-bracket-h-line-popup var(--h-lines-popup-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration));
+  }
+
+  .hyphen {
+    height: var(--bracket-width);
+    width: 0;
+    animation: logo-hyphen-popup var(--hyphen-span-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration));
+  }
+}
+
+@keyframes logo-square-popup {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logo-vline-left-popup {
+  0% {
+    height: var(--bracket-width);
+  }
+  100% {
+    height: var(--final-height);
+  }
+}
+
+@keyframes logo-vline-right-popup {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(--bracket-width);
+  }
+}
+
+@keyframes logo-vlines-apart {
+  0% {
+    width: calc(var(--bracket-width)*2);
+  }
+  100% {
+    width: calc(var(--mid-width));
+  }
+}
+
+@keyframes logo-full-width {
+  0% {
+    width: calc(var(--mid-width));
+  }
+  100% {
+    width: calc(var(--final-width));
+  }
+}
+
+@keyframes logo-bracket-h-line-popup {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(--bracket-ends-length);
+  }
+}
+
+@keyframes logo-hyphen-popup {
+  0% {
+    width: fit-content;
+  }
+  50% {
+    width: var(--hyphen-length);
+  }
+  100% {
+    width: var(--hyphen-length);
+  }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+  }
+}
