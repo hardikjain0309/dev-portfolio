@@ -9,10 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#030526",
-        primary: "#ccd6f6",
-        secondary: "#495670",
-        interactive: "#8552F2"
+        background: "#0f0f0f",
+        body: "#1a1a1a",
+        primary: "#e5e5e5",
+        secondary: "#b0b0b0",
+        tertiary: "#616161",
+        interactive: "#5b78f6"
+      },
+      fontFamily: {
+        sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
       }
     },
   },
