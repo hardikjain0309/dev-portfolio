@@ -6,14 +6,14 @@
   --bracket-ends-length: 40px;
   --hyphen-length: 80px;
 
-  --square-popup-duration: 200ms;
-  --line-popup-duration: 200ms;
-  --hyphen-span-duration: 500ms;
-  --h-lines-popup-duration: 500ms;
-  --logo-shrink-duration: 500ms;
+  --square-popup-duration: 100ms;
+  --line-popup-duration: 100ms;
+  --hyphen-span-duration: 400ms;
+  --h-lines-popup-duration: 200ms;
+  --logo-shrink-duration: 400ms;
 
   height: calc(100vh - 4rem);
-  animation: logo-container-shrink var(--logo-shrink-duration) ease-in-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
+  animation: logo-shrink var(--logo-shrink-duration) ease-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
 
   .bracket-vline-left {
     width: var(--bracket-width);
@@ -43,10 +43,8 @@
   .logo-container {
     max-width: var(--final-width);
     width: fit-content;
-    animation: logo-full-width var(--h-lines-popup-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration)),
-      logo-shrink var(--logo-shrink-duration) ease-in-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;;
+    animation: logo-full-width var(--h-lines-popup-duration) forwards calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration));
   }
-
 }
 
 @keyframes logo-square-popup {
@@ -115,18 +113,11 @@
 @keyframes logo-shrink {
   0% {
     transform: scale(1);
-  }
-  100% {
-    transform: scale(0.2);
-  }
-}
-
-@keyframes logo-container-shrink {
-  0% {
     height: calc(100vh - 2rem);
-    width: calc(100vw - 4rem);
+    width: calc(100vw - 4rem)
   }
   100% {
+    transform: scale(0.15);
     height: calc(var(--final-height) / 5);
     width: calc(var(--final-width) / 5);
   }

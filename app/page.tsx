@@ -1,9 +1,5 @@
-import LogoAnimation from "./_components/logoAnimation/logoAnimation";
+import NavBar from "./_components/logoAnimation/navBar";
 
 export default function Home() {
-  return (
-    <>
-      <LogoAnimation />
-    </>
-  );
+  return (<NavBar />);
 }
