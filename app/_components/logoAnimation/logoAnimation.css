@@ -12,7 +12,9 @@
   --h-lines-popup-duration: 200ms;
   --logo-shrink-duration: 400ms;
 
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 2rem);
+  width: calc(100vw - 4rem);
+  align-self: start;
   animation: logo-shrink var(--logo-shrink-duration) ease-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
 
   .bracket-vline-left {
@@ -114,7 +116,7 @@
   0% {
     transform: scale(1);
     height: calc(100vh - 2rem);
-    width: calc(100vw - 4rem)
+    width: calc(100vw - 4rem);
   }
   80% {
     transform: scale(0.2);
