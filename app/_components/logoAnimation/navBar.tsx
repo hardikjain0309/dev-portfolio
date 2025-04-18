@@ -108,7 +108,7 @@ function NavBar() {
     </div>
   }
 
-  return (<div ref={ navBarContainerRef } className="max-h-16">
+  return (<div ref={ navBarContainerRef }>
     <div className={ `${ showNavItems ? "flex items-center justify-between px-8 py-4" : "px-8 py-4" }` }>
       <div className={showNavItems ? "flex gap-2 items-center h-8" : ""}>
         <LogoAnimation />
