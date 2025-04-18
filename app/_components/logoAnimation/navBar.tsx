@@ -28,7 +28,7 @@ const activeItemClass = "text-primary";
 const inactiveItemClass = "text-tertiary";
 const beforeShowContainerClass = "opacity-0 -translate-y-full";
 const afterShowContainerClass = "opacity-100 -translate-y-0 transition duration-500 ease-in-out";
-const navMenuClass = "flex flex-col gap-4 items-center absolute top-18 transition-all duration-500 ease-in-out w-full p-4 md:hidden";
+const navMenuClass = "flex flex-col gap-4 items-center transition-all duration-500 ease-in-out w-full p-4 md:hidden";
 const expandedNavMenuClass = "opacity-100 overflow-visible";
 const collapsedNavMenuClass = "scale-y-0 -translate-y-[100px] opacity-0 overflow-hidden";
 
@@ -108,7 +108,7 @@ function NavBar() {
     </div>
   }
 
-  return (<div ref={ navBarContainerRef } className="relative">
+  return (<div ref={ navBarContainerRef }>
     <div className={ `${ showNavItems ? "flex items-center justify-between px-8 py-4" : "px-8 py-4" }` }>
       <div className={showNavItems ? "flex gap-2 items-center" : ""}>
         <LogoAnimation />
