@@ -14,7 +14,7 @@ function Animatedhamburger(props: IAnimatedHamburgerProps) {
         case 0:
           return beforeOpenLineClass + " w-8 h-0.5 rotate-45 translate-y-2.5";
         case 1:
-          return beforeOpenLineClass + " opacity-0";
+          return beforeOpenLineClass + " w-0";
         case 2:
           return beforeOpenLineClass + " w-8 h-0.5 -rotate-45 -translate-y-2.5 ";
         default:
@@ -24,7 +24,7 @@ function Animatedhamburger(props: IAnimatedHamburgerProps) {
     return beforeOpenLineClass;
   }
 
-  return ( <button className="flex flex-col gap-2 justify-center align-center" onClick={props.onClick}>
+  return ( <button className="flex flex-col gap-2 justify-center items-center" onClick={props.onClick}>
     {[0, 1, 2].map(index => <span key={index} className={getLineClass(index)}></span>)}
   </button>);
 }
