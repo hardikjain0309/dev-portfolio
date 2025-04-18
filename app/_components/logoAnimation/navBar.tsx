@@ -3,8 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import LogoAnimation from "./logoAnimation";
 import { delay } from "@/src/utils/asyncUtil";
 import { Roboto } from "next/font/google";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoClose } from "react-icons/io5";
+import Animatedhamburger from "./animatedHamburger";
 import { useClickOutside } from "@/src/utils/customHooks";
 
 enum NavBarItemKeys {
@@ -23,21 +22,21 @@ const InitialsFont = Roboto({
 const showNavItemsDelay = 1200;
 
 const activeKey = NavBarItemKeys.Home;
-const navBarItemClass = "font-thin cursor-pointer";
+const navBarItemClass = "font-thin cursor-pointer max-w-fit";
 const hoverTransitonClass = "transition ease-in-out hover:scale-110 hover:text-secondary active:text-tertiary";
 const activeItemClass = "text-primary";
 const inactiveItemClass = "text-tertiary";
 const beforeShowContainerClass = "opacity-0 -translate-y-full";
 const afterShowContainerClass = "opacity-100 -translate-y-0 transition duration-500 ease-in-out";
-const navPanelButtonClass = "hover:bg-background hover:text-secondary hover:transition";
+const navMenuClass = "flex flex-col gap-4 items-center absolute top-18 transition-all duration-500 ease-in-out w-full p-4 md:hidden";
+const expandedNavMenuClass = "opacity-100 overflow-visible";
+const collapsedNavMenuClass = "scale-y-0 -translate-y-[100px] opacity-0 overflow-hidden";
 
 
 function NavBar() {
   const [showNavItems, setShowNavItems] = useState(false);
-  const [isPanelExpanded, setIsPanelExpanded] = useState(false);
-  const panelContainerRef = useRef<HTMLDivElement|null>(null);
-  const panelShowedOnce = useRef(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navBarContainerRef = useRef<HTMLDivElement>(null);
   const showNavItemsPostDelay = useMemo(() => async () => {
     await delay(showNavItemsDelay);
     setShowNavItems(true);
@@ -47,27 +46,22 @@ function NavBar() {
     showNavItemsPostDelay();
   }, [showNavItemsPostDelay]);
 
-  const onHamburgerClick = () => {
-    setIsPanelExpanded((prev) => !prev);
-    if (!panelShowedOnce.current) {
-      panelShowedOnce.current = true;
-    }
+  
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
   }
 
-  const onCloseClick = () => {
-    setIsPanelExpanded(false);
+  const onClickOutside = () => {
+    setIsMenuOpen(false);
   }
 
-  const onPanelClickOutside = () => {
-    setIsPanelExpanded(false);
-  }
+  useClickOutside(onClickOutside, navBarContainerRef);
 
-  useClickOutside(onPanelClickOutside, panelContainerRef);
 
   const renderInitials = () => {
     const beforeTransitionClass = "-left-16";
     const afterTransitionClass = "left-0 transition-left duration-300 delay-200 ease-in-out";
-    const initialsClass = showNavItems ? afterTransitionClass : beforeTransitionClass;
+    const initialsClass = (showNavItems ? afterTransitionClass : beforeTransitionClass);
     const initials = showNavItems ? "H.J." : "";
     const initialsEl = <span className={ `text-4xl  text-primary leading-none absolute ${InitialsFont.className} ${initialsClass}` }>{ initials }</span>;
 
@@ -75,36 +69,33 @@ function NavBar() {
   }
 
   const renderNavItem = (key: NavBarItemKeys) => {
-    const itemStateClass = activeKey === key ? activeItemClass : inactiveItemClass;
+    const itemStateClass = (activeKey === key ? activeItemClass : inactiveItemClass);
     return (
-      <a key={key} className={`${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
+      <a key={key} className={ `${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
         { key } 
       </a>
     );
   };
 
-  const renderNavBarPanel = () => {
-    if (!panelShowedOnce.current) {
-      return null;
-    }
-    const panelExpandedClass = isPanelExpanded ? "translate-x-0 opacity-1": "translate-x-full opacity-0";
-    const panelClass = "absolute -top-8 -right-8 w-48 h-screen bg-body flex flex-col panel-container transition duration-500 ease-in-out";
-    return <div className={ `${ panelClass } ${ panelExpandedClass }` } ref={ panelContainerRef}>
-      <button className={ "self-end p-4 " + navPanelButtonClass } onClick={ onCloseClick }><IoClose /></button>
-      { Object.values(NavBarItemKeys).map((key) => <a key={key} className={ "p-2 px-4 cursor-pointer " + navPanelButtonClass }>{ key }</a>) }
-    </div>
+  const renderNavItems = () => {
+    return Object.values(NavBarItemKeys).map((key) => renderNavItem(key));
   }
 
   const renderCollapsedNavBarItems = () => {
     return <span className="flex md:hidden h-10 items-center">
-      <button className="hover:text-secondary" onClick={ onHamburgerClick }><RxHamburgerMenu /></button>
-      { renderNavBarPanel()}
+      <Animatedhamburger open={ isMenuOpen } onClick={ toggleMenu }/>
     </span>
   }
 
   const renderUnCollapsedNavBarItems = () => {
     return <div className="hidden items-center gap-8 md:flex">
-      { Object.values(NavBarItemKeys).map((key) => renderNavItem(key)) }
+      { renderNavItems() }
+    </div>
+  }
+
+  const renderNavMenu = () => {
+    return <div className={`${navMenuClass} ${isMenuOpen ? expandedNavMenuClass : collapsedNavMenuClass}`}>
+      { renderNavItems()}
     </div>
   }
 
@@ -117,12 +108,15 @@ function NavBar() {
     </div>
   }
 
-  return (<div className={ `${ showNavItems ? "flex items-center justify-between" : "" }` }>
+  return (<div ref={ navBarContainerRef } className="relative">
+    <div className={ `${ showNavItems ? "flex items-center justify-between px-8 py-4" : "px-8 py-4" }` }>
       <div className={showNavItems ? "flex gap-2 items-center" : ""}>
         <LogoAnimation />
         { renderInitials() }
       </div>
       { renderNavBarItems() }
+    </div>
+    { renderNavMenu() }
   </div>);
 }
 
