@@ -19,7 +19,7 @@ const InitialsFont = Roboto({
   subsets: ["latin"]
 });
 
-const showNavItemsDelay = 1200;
+const showNavItemsDelay = 1500;
 
 const activeKey = NavBarItemKeys.Home;
 const navBarItemClass = "font-thin cursor-pointer max-w-fit";

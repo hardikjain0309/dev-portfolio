@@ -5,23 +5,21 @@ interface IAnimatedHamburgerProps {
   onClick: () => void;
 }
 
-const beforeOpenLineClass = "bg-primary w-6 h-0.5 rounded-full transition-all duration-500 ease-in-out";
+const beforeOpenLineClass = "bg-primary h-0.5 rounded-full transition-all duration-500 ease-in-out";
 
 function Animatedhamburger(props: IAnimatedHamburgerProps) {
+  const { open } = props;
   const getLineClass = (index: number) => {
-    if (props.open) {
-      switch (index) {
-        case 0:
-          return beforeOpenLineClass + " w-8 h-0.5 rotate-45 translate-y-2.5";
-        case 1:
-          return beforeOpenLineClass + " w-0";
-        case 2:
-          return beforeOpenLineClass + " w-8 h-0.5 -rotate-45 -translate-y-2.5 ";
-        default:
-          return beforeOpenLineClass;
-      }
+    switch (index) {
+      case 0:
+        return beforeOpenLineClass + (open ? " w-8 rotate-45 translate-y-2.5" : " w-6");
+      case 1:
+        return beforeOpenLineClass + (open ? " w-0" : " w-6");
+      case 2:
+        return beforeOpenLineClass + (open ? " w-8 h-0.5 -rotate-45 -translate-y-2.5" : " w-6");
+      default:
+        return beforeOpenLineClass;
     }
-    return beforeOpenLineClass;
   }
 
   return ( <button className="flex flex-col gap-2 justify-center items-center" onClick={props.onClick}>
