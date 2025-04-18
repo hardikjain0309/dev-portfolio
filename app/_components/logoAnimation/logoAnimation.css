@@ -1,10 +1,10 @@
 .logo-animation-container {
-  --bracket-width: 20px;
-  --final-height: 200px;
-  --mid-width: 120px;
-  --final-width: 200px;
-  --bracket-ends-length: 40px;
-  --hyphen-length: 80px;
+  --bracket-width: 1rem;
+  --final-height: 10rem;
+  --mid-width: 8rem;
+  --final-width: 10rem;
+  --bracket-ends-length: 2rem;
+  --hyphen-length: 5rem;
 
   --square-popup-duration: 100ms;
   --line-popup-duration: 100ms;
@@ -116,8 +116,13 @@
     height: calc(100vh - 2rem);
     width: calc(100vw - 4rem)
   }
+  80% {
+    transform: scale(0.2);
+    height: calc(var(--final-height) / 4.8);
+    width: calc(var(--final-width) / 4.8);
+  }
   100% {
-    transform: scale(0.15);
+    transform: scale(0.2);
     height: calc(var(--final-height) / 5);
     width: calc(var(--final-width) / 5);
   }
