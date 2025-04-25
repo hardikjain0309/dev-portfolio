@@ -19,7 +19,7 @@ const InitialsFont = Roboto({
   subsets: ["latin"]
 });
 
-const showNavItemsDelay = 1300;
+const showNavItemsDelay = 1900;
 
 const activeKey = NavBarItemKeys.Home;
 const navBarItemClass = "font-thin cursor-pointer max-w-fit";
@@ -27,7 +27,7 @@ const hoverTransitonClass = "transition ease-in-out hover:scale-110 hover:text-s
 const activeItemClass = "text-primary";
 const inactiveItemClass = "text-tertiary";
 const beforeShowContainerClass = "opacity-0 -translate-y-full";
-const afterShowContainerClass = "opacity-100 -translate-y-0 transition duration-500 ease-in-out";
+const afterShowContainerClass = "opacity-100 -translate-y-0 transition duration-500 ease-in-out delay-500";
 const navMenuClass = "flex flex-col gap-4 items-center transition-all duration-500 ease-in-out w-full p-4 md:hidden";
 const expandedNavMenuClass = "opacity-100 overflow-visible";
 const collapsedNavMenuClass = "scale-y-0 -translate-y-[200px] opacity-0 overflow-hidden p-0";
@@ -60,10 +60,9 @@ function NavBar() {
 
   const renderInitials = () => {
     const beforeTransitionClass = "-left-16";
-    const afterTransitionClass = "left-0 transition-left duration-300 delay-200 ease-in-out";
-    const initialsClass = (showNavItems ? afterTransitionClass : beforeTransitionClass);
-    const initials = showNavItems ? "H.J." : "";
-    const initialsEl = <span className={ `text-4xl  text-primary leading-none absolute ${InitialsFont.className} ${initialsClass}` }>{ initials }</span>;
+    const afterTransitionClass = "left-0 transition-left duration-300 delay-500 ease-in-out";
+    const initialsClass = showNavItems ? afterTransitionClass : beforeTransitionClass;
+    const initialsEl = <span className={ `text-4xl  text-primary leading-none absolute ${InitialsFont.className} ${initialsClass}` }>H.J.</span>;
 
     return <div className="overflow-hidden relative w-16 h-8">{ initialsEl }</div>;
   }
