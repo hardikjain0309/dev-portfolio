@@ -10,12 +10,12 @@
   --line-popup-duration: 100ms;
   --hyphen-span-duration: 400ms;
   --h-lines-popup-duration: 200ms;
-  --logo-shrink-duration: 400ms;
+  --logo-shrink-duration: 1000ms;
 
   height: calc(100vh - 2rem);
   width: calc(100vw - 4rem);
   align-self: start;
-  animation: logo-shrink var(--logo-shrink-duration) ease-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
+  animation: logo-shrink var(--logo-shrink-duration) ease-in-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
 
   .bracket-vline-left {
     width: var(--bracket-width);
