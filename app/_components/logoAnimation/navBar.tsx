@@ -60,7 +60,7 @@ function NavBar() {
 
   const renderInitials = () => {
     const beforeTransitionClass = "-left-16";
-    const afterTransitionClass = "left-0 transition-left duration-300 delay-200 ease-in-out";
+    const afterTransitionClass = "left-0 transition-left duration-300 ease-in-out";
     const initialsClass = showNavItems ? afterTransitionClass : beforeTransitionClass;
     const initialsEl = <span className={ `text-4xl  text-primary leading-none absolute ${InitialsFont.className} ${initialsClass}` }>H.J.</span>;
 

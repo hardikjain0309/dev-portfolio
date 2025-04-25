@@ -15,7 +15,7 @@
   height: calc(100vh - 2rem);
   width: calc(100vw - 4rem);
   align-self: start;
-  animation: logo-shrink var(--logo-shrink-duration) ease-in-out calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
+  animation: logo-shrink var(--logo-shrink-duration) cubic-bezier(0.39, -0.02, 0.61, 0.99) calc(var(--square-popup-duration) + var(--line-popup-duration) + var(--line-popup-duration) + var(--hyphen-span-duration) + var(--h-lines-popup-duration)) 1 normal forwards;
 
   .bracket-vline-left {
     width: var(--bracket-width);
