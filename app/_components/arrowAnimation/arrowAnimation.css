@@ -1,0 +1,56 @@
+@keyframes rightArrowChevron {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  85% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@keyframes leftArrowChevron {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+}
+
+.arrow-animation-ctr {
+
+  .left-chevron {
+    animation: leftArrowChevron 1.5s ease-in-out infinite;
+  }
+
+  .right-chevron {
+    animation: rightArrowChevron 1.5s ease-in-out infinite;
+  }
+}

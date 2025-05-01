@@ -1,0 +1,19 @@
+.marquee {
+  animation: marquee 10s linear infinite;
+}
+
+.marquee-duplicate {
+  position: absolute;
+  animation: marquee-duplicate 10s linear infinite;
+  top: 0px;
+}
+  
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-duplicate {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}

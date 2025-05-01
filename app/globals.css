@@ -5,3 +5,8 @@
 nextjs-portal {
   position: absolute;
 }
+
+.box-shadow {
+  background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+}
+  
