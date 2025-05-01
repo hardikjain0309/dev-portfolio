@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`antialiased bg-background text-primary`}>
         <div className="flex flex-col min-h-screen items-center">
           <NavBar />
-          <main className="py-8 px-8 gap-4 mt-12 max-w-4xl">
+          <main className="py-8 px-8 gap-4 mt-12 max-w-screen-lg">
             {children}
           </main>
         </div>

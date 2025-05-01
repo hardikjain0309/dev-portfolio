@@ -78,18 +78,18 @@ export default function Home() {
   }
 
   const renderExperienceTile = (metric: React.ReactNode, title: string) => {
-    return <div className="relative bg-background rounded-3xl">
+    return <div className="relative bg-background rounded-3xl flex-1 max-w-28">
       <div className="absolute w-full h-full rounded-3xl opacity-20 box-shadow"></div>
       <div className="flex flex-col gap-4 p-4 min-w-20 items-center justify-between h-full">
         <span className="font-medium text-4xl">{ metric }</span>
-        <span className="text-secondary text-sm md:text-normal">{ title }</span>
+        <span className="text-secondary text-normal">{ title }</span>
       </div>
     </div>
   }
 
   const renderExperienceBox = () => {
     return renderRedirectableTile(
-      <div className="flex gap-4 md:gap-8">
+      <div className="flex gap-4 md:gap-8 flex-wrap justify-center">
         { renderExperienceTile(<div className="flex gap-0 items-center">
             <span className="block text-4xl">7</span>
             <span className="block text-2xl">+</span>
