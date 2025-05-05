@@ -35,11 +35,14 @@ const collapsedNavMenuClass = "scale-y-0 -translate-y-1/2 opacity-0 overflow-hid
 
 function NavBar() {
   const [showNavItems, setShowNavItems] = useState(false);
+  const [startIntialsAnimation, setStartIntialsAnimation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navBarContainerRef = useRef<HTMLDivElement>(null);
   const showNavItemsPostDelay = useMemo(() => async () => {
     await delay(showNavItemsDelay);
     setShowNavItems(true);
+    await delay(100);
+    setStartIntialsAnimation(true);
   }, []);
 
   useEffect(() => {
@@ -59,12 +62,16 @@ function NavBar() {
 
 
   const renderInitials = () => {
+    if ( !showNavItems ) {
+      return null;
+    }
+
     const beforeTransitionClass = "-left-16";
     const afterTransitionClass = "left-0 transition-left duration-[800ms] ease-in-out";
-    const initialsClass = showNavItems ? afterTransitionClass : beforeTransitionClass;
+    const initialsClass = startIntialsAnimation ? afterTransitionClass : beforeTransitionClass;
     const initialsEl = <span className={ `text-4xl text-primary leading-none absolute ${InitialsFont.className} ${initialsClass}` }>H.J.</span>;
 
-    return <div className="overflow-hidden relative w-16 h-8">{ initialsEl }</div>;
+    return <div className={ "overflow-hidden relative w-16 h-8" }>{ initialsEl }</div>;
   }
 
   const renderNavItem = (key: NavBarItemKeys) => {
@@ -93,6 +100,10 @@ function NavBar() {
   }
 
   const renderNavMenu = () => {
+    if (!showNavItems) {
+      return null;
+    }
+
     return <div className={`${navMenuClass} ${isMenuOpen ? expandedNavMenuClass : collapsedNavMenuClass}`}>
       { renderNavItems()}
     </div>

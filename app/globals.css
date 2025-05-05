@@ -6,7 +6,25 @@ nextjs-portal {
   position: absolute;
 }
 
-.box-shadow {
+.shadow-box::before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.25;
+  border-radius: inherit;
+  z-index: 1;
   background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+}
+
+.shadow-box * {
+  z-index: 2;
+  position: relative;
+}
+
+.shadow-box {
+  position: relative;
 }
   
