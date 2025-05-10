@@ -52,7 +52,7 @@ function ShowOnScrollIntoView({ children }: PropsWithChildren) {
     }
   }, [contentId]);
 
-  return ( <div id={contentId} className={`h-full ${showContent ? "opacity-100 scale-100 transition duration-[700ms] ease-out delay-200" : "opacity-0 scale-75"}`}>
+  return ( <div id={contentId} className={`h-full ${showContent ? "opacity-100 scale-100 transition duration-[1000ms] ease-out delay-200" : "opacity-0 scale-50"}`}>
     { children }
   </div>);
 }
