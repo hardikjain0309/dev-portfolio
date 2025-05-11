@@ -5,14 +5,33 @@ import { delay } from "@/src/utils/asyncUtil";
 import { Roboto } from "next/font/google";
 import Animatedhamburger from "./animatedHamburger";
 import { useClickOutside } from "@/src/utils/customHooks";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 enum NavBarItemKeys {
   Home = "Home",
   About = "About",
-  Works = "Experience",
+  Experience = "Experience",
   Projects = "Projects",
   Contact = "Contact"
 }
+
+const NavKeyToRouteMap: Record<NavBarItemKeys, string> = {
+  [NavBarItemKeys.Home]: "/",
+  [NavBarItemKeys.About]: "/about",
+  [NavBarItemKeys.Experience]: "/experience",
+  [NavBarItemKeys.Projects]: "/projects",
+  [NavBarItemKeys.Contact]: "/contact"
+}
+
+const RouteToActiveKeyMap: Record<string, NavBarItemKeys> = {
+  [NavKeyToRouteMap[NavBarItemKeys.Home]]: NavBarItemKeys.Home,
+  [NavKeyToRouteMap[NavBarItemKeys.About]]: NavBarItemKeys.About,
+  [NavKeyToRouteMap[NavBarItemKeys.Experience]]: NavBarItemKeys.Experience,
+  [NavKeyToRouteMap[NavBarItemKeys.Projects]]: NavBarItemKeys.Projects,
+  [NavKeyToRouteMap[NavBarItemKeys.Contact]]: NavBarItemKeys.Contact
+}
+
 
 const InitialsFont = Roboto({
   weight: "500",
@@ -21,7 +40,6 @@ const InitialsFont = Roboto({
 
 const showNavItemsDelay = 1900;
 
-const activeKey = NavBarItemKeys.Home;
 const navBarItemClass = "font-thin cursor-pointer max-w-fit";
 const hoverTransitonClass = "transition ease-in-out hover:scale-110 hover:text-secondary active:text-tertiary";
 const activeItemClass = "text-primary";
@@ -38,6 +56,11 @@ function NavBar() {
   const [startIntialsAnimation, setStartIntialsAnimation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navBarContainerRef = useRef<HTMLDivElement>(null);
+  const pathName = usePathname();
+  const activeKey = useMemo(() => {
+    return RouteToActiveKeyMap[pathName as string] || NavBarItemKeys.Home;
+  }, [pathName]);
+
   const showNavItemsPostDelay = useMemo(() => async () => {
     await delay(showNavItemsDelay);
     setShowNavItems(true);
@@ -77,9 +100,9 @@ function NavBar() {
   const renderNavItem = (key: NavBarItemKeys) => {
     const itemStateClass = (activeKey === key ? activeItemClass : inactiveItemClass);
     return (
-      <a key={key} className={ `${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
+      <Link key={key} href={NavKeyToRouteMap[key] || "#"} onClick={ toggleMenu } className={ `${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
         { key } 
-      </a>
+      </Link>
     );
   };
 

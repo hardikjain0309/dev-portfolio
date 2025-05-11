@@ -141,7 +141,7 @@ export default function Home() {
 
   return (<div className="py-8 px-8 max-w-screen-[1170px] grid grid-cols-4 gap-8">
     <div className="col-span-4 lg:col-span-2 row-span-2">
-      <GridBox>
+      <GridBox href="/about">
         { renderAboutMeBox() }
       </GridBox>
     </div>

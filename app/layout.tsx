@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={`antialiased bg-background text-primary`}>
         <div className="flex flex-col items-center">
           <NavBar />
-          <main className="mt-12">
+          <main className="mt-16">
             <PostAnimationLoader>
               {children}
             </PostAnimationLoader>
