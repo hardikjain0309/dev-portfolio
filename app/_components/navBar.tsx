@@ -100,7 +100,7 @@ function NavBar() {
   const renderNavItem = (key: NavBarItemKeys) => {
     const itemStateClass = (activeKey === key ? activeItemClass : inactiveItemClass);
     return (
-      <Link key={key} href={NavKeyToRouteMap[key] || "#"} onClick={ toggleMenu } className={ `${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
+      <Link key={key} href={NavKeyToRouteMap[key] || "#"} onClick={ () => setIsMenuOpen(false) } className={ `${itemStateClass} ${ navBarItemClass } ${ hoverTransitonClass }` }>
         { key } 
       </Link>
     );

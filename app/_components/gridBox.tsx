@@ -8,7 +8,7 @@ interface IGridBoxProps {
 }
 
 function GridBox({ children, href, className }: PropsWithChildren<IGridBoxProps>) {
-  let boxContent = <div className={`relative bg-background h-full shadow-box rounded-3xl w-fit ${className || ""}`}>
+  let boxContent = <div className={`relative bg-background h-full shadow-box rounded-3xl ${className || ""}`}>
     <div className="flex flex-col gap-4 p-8 h-full">
       { children }
     </div>
