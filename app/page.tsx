@@ -3,27 +3,37 @@ import profilePhoto from "../public/img/profile.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaRegBuilding } from "react-icons/fa";
 import { LuBriefcase } from "react-icons/lu";
-import { FaReact } from "react-icons/fa6";
-import { TbBrandTypescript } from "react-icons/tb";
-import { IoLogoJavascript } from "react-icons/io";
-import { BiLogoRedux } from "react-icons/bi";
-import { IoAccessibilityOutline } from "react-icons/io5";
-import { AiOutlineHtml5 } from "react-icons/ai";
-import { SiNutanix } from "react-icons/si";
-import { BsMicrosoft } from "react-icons/bs";
 import { LuDot } from "react-icons/lu";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { CSSProperties } from "react";
 import ArrowAnimation from "./_components/arrowAnimation/arrowAnimation";
 import GridBox from "./_components/gridBox";
 import MarqueeAnimation from "./_components/marqueeAnimation.tsx/margueeAnimation";
+import { globalConfig, SocialProfiles } from "@/src/config/globalConfig";
+import { LogosMap } from "@/src/utils/iconUtil";
 
 const profileContainerStyle: CSSProperties = {
   background: "linear-gradient(90deg, #5B78F6 -15%, #C2EBFF 58%, #5B78F6 97%)",
   overflow: "hidden"
 }
+
+const {
+  profile: {
+    name,
+    jobTitle,
+    currentCompany,
+    location
+  },
+  workInfo: {
+    currentTeam,
+    currentSideProject,
+    companies,
+    experienceInYears,
+    numTeams,
+    numCompanies,
+    skills
+  }
+ } = globalConfig;
 
 export default function Home() {
   const renderRedirectableTile = (content: React.ReactNode, title: React.ReactNode) => {
@@ -44,19 +54,19 @@ export default function Home() {
         </div>
         <div className="flex flex-col flex-1 flex-grow pt-4 shrink-0 self-start min-w-[140px]">
           <div className="flex-col">
-            <span className="text-4xl font-medium mb-4 block">Hardik Jain</span>
+            <span className="text-4xl font-medium mb-4 block">{ name }</span>
             <div className="flex flex-col gap-1.5">
               <span className="flex gap-2 text-secondary items-center">
                 <LuBriefcase />
-                <span className="text-secondary">Front-end Developer</span>
+                <span className="text-secondary">{ jobTitle }</span>
               </span>
               <span className="flex gap-2 text-secondary items-center">
                 <FaRegBuilding />
-                <span className="text-secondary">Nutanix</span>
+                <span className="text-secondary">{ currentCompany }</span>
               </span>
               <span className="flex gap-2 text-secondary items-center">
                 <IoLocationOutline />
-                <span>Bangalore</span>
+                <span>{ location }</span>
               </span>
             </div>
           </div>
@@ -69,12 +79,7 @@ export default function Home() {
   const renderSkillsBox = () => {
     return renderRedirectableTile(
       <div className="flex gap-4 text-6xl flex-1 justify-center items-center">
-        <FaReact />
-        <BiLogoRedux />
-        <TbBrandTypescript />
-        <IoLogoJavascript />
-        <IoAccessibilityOutline />
-        <AiOutlineHtml5 />
+        {skills.map(skill => <span key={skill}>{ LogosMap[skill] }</span>)}
       </div>,
       "Skills"
     );
@@ -93,15 +98,16 @@ export default function Home() {
     return renderRedirectableTile(
       <div className="flex gap-8 flex-wrap justify-center">
         { renderExperienceTile(<div className="flex gap-0 items-center">
-            <span className="block text-4xl">7</span>
+            <span className="block text-4xl">{ experienceInYears }</span>
             <span className="block text-2xl">+</span>
           </div>, "Years") }
-        { renderExperienceTile("3", "Teams") }
+        { renderExperienceTile(numTeams, "Teams") }
         { renderExperienceTile(<div className="flex gap-4 items-center">
-          <span className="block text-4xl">2</span>
+          <span className="block text-4xl">{ numCompanies }</span>
           <span className="flex flex-col gap-2 text-lg">
-            <span className="block"><SiNutanix /></span>
-            <span className="block"><BsMicrosoft /></span>
+            {companies.map(company => <span key={company} className="block">
+              {LogosMap[company]}
+            </span>)}
           </span>
         </div>, "Companies") }
       </div>,
@@ -115,16 +121,16 @@ export default function Home() {
 
   const renderCurrentWorkBox = () => {
     return <MarqueeAnimation>
-        <span>Current Team: <span className="font-medium">Nutanix Move</span></span>
+        <span>Current Team: <span className="font-medium">{ currentTeam }</span></span>
         <span className="flex text-lg"><LuDot /></span>
-        <span>Current side project: <span className="font-medium">This Dev Portfolio</span></span>
+        <span>Current side project: <span className="font-medium">{ currentSideProject }</span></span>
         <span className="flex text-lg"><LuDot /></span>
         <span></span>
     </MarqueeAnimation>
   }
 
   const renderProfileCircle = (icon: React.ReactNode, link: string) => {
-    return <a className="p-6 rounded-full shadow-box border-primary border-solid border-[1px] border-opacity-10 bg-opacity-20  hover:bg-primary hover:text-background transition-all duration-500" href={ link } target="_blank">
+    return <a key={link} className="p-6 rounded-full shadow-box border-primary border-solid border-[1px] border-opacity-10 bg-opacity-20  hover:bg-primary hover:text-background transition-all duration-500" href={ link } target="_blank">
       <span className="text-4xl">
         { icon }
       </span>
@@ -133,8 +139,7 @@ export default function Home() {
 
   const renderProfilesBox = () => {
     return renderRedirectableTile(<div className="flex gap-4 justify-center items-center">
-      { renderProfileCircle(<FaGithub />, "https://github.com/hardikjain0309" ) }
-      { renderProfileCircle(<FaLinkedin />, "https://www.linkedin.com/in/hardikjain96/" ) }
+      { Object.values(SocialProfiles).map(profile => renderProfileCircle(LogosMap[profile], profile)) }
       { renderProfileCircle(<MdDownload />, "#" ) }
     </div>, "Contact");
   }

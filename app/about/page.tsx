@@ -4,13 +4,21 @@ import Image from "next/image";
 import { CSSProperties } from "react";
 import ShowOnScrollIntoView from "../_components/showOnScrollIntoView";
 import { GoNorthStar } from "react-icons/go";
+import { globalConfig } from "@/src/config/globalConfig";
 
 const profileContainerStyle: CSSProperties = {
   background: "linear-gradient(90deg, #3C58E3 -15%, #C2EBFF 58%, #5AB5E2 97%)",
   overflow: "hidden"
 }
 
-const summaryText = "With over seven years of experience, I currently work at Nutanix in Bangalore, building modern web applications with React. I love creating smooth, responsive user experiences — and I’m especially passionate about writing code that’s scalable, high-performing, and easy to maintain. While front-end is where I thrive, I’ve also explored Azure cloud, done a bit of backend development, and I’m on a steady path toward becoming a full-stack developer. I enjoy learning new things and contributing to projects that make a difference.";
+const {
+  profile: {
+    name
+  },
+  about: {
+    summary: summaryText
+  }
+} = globalConfig;
 
 function AboutMePage() {
   const renderProfilePhoto = () => {
@@ -33,7 +41,7 @@ function AboutMePage() {
         </ShowOnScrollIntoView>
       </span>
       <GridBox>
-        <span className="text-4xl font-medium mb-4 block">Hardik Jain</span>
+        <span className="text-4xl font-medium mb-4 block">{ name }</span>
         <span className="block">{ summaryText }</span>
       </GridBox>
     </div>
